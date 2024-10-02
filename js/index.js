@@ -1,10 +1,6 @@
 const category = document.getElementById('category');
 
-const FetchData = async() => {
-    // fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
-    // .then(response => response.json())
-    // .then(data => buttons(data))
-
+const fetchButtonData = async() => {
     try{
         let response = await fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
         let data = await response.json();
@@ -14,20 +10,51 @@ const FetchData = async() => {
     }
 }
 
+const fetchVideoData = async() => {
+    try{
+        let response = await fetch('https://openapi.programming-hero.com/api/phero-tube/videos');
+        let data = await response.json();
+        videosCollection(data);
+    }catch(error){
+        console.log(error);
+    }
+}
 
-// const buttons = (buttonsName) => {
-//     let categoryButton = buttonsName.categories;
-//     console.log(categoryButton[0].category);
-//     const parentButtons = document.getElementById("category");
+const videosCollection = (videosInfo) => {
+    const videoContent = videosInfo.videos;
+    const videoContainer = document.getElementById('videos');
+    videoContent.forEach(singleItem => {
+        console.log(singleItem);
+        let authors = singleItem.authors;
 
-//     parentButtons.innerHTML = `
-//                 <div class="flex gap-4 justify-center my-8">
-//                 <button class="btn">${categoryButton[0].category}</button>
-//                 <button class="btn">${categoryButton[1].category}</button>
-//                 <button class="btn">${categoryButton[2].category}</button>
-//             </div>
-//         `
-// }
+        let profileName = authors.map(item => item.profile_name)
+        let profilePicture = authors.map(item => item.profile_picture)
+
+        let div = document.createElement('div');
+        div.innerHTML = `
+            <div>
+             <div class="w-full box-border">
+                 <img src="${singleItem.thumbnail}" class="w-full h-[200px] object-cover" alt="">
+             </div>
+            </div>
+            <div class="flex">
+                <div class="">
+                    <img src="${profilePicture}" class="w-10 h-10 object-cover rounded-full" alt="">
+                </div>
+                
+                <p>${singleItem.title}</p>
+            </div>
+             <div>
+                <h2>${profileName}</h2>
+            </div>
+            <div>
+                <p>${singleItem.others.views}</p>
+            </div>
+        `
+        videoContainer.append(div);
+    })
+}
+
 
 const buttons = (buttonsName) => {
     let categoryButton = buttonsName.categories;
@@ -42,4 +69,5 @@ const buttons = (buttonsName) => {
     });
 }
 
-FetchData();
+fetchButtonData();
+fetchVideoData();
