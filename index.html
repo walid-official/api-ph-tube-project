@@ -16,7 +16,7 @@
             </div>
             <div class="search my-5 sm:my-0">
                 <label class="input input-bordered flex items-center gap-2">
-                    <input type="text" class="grow" placeholder="Search" />
+                    <input id="search-input" type="text" class="grow" placeholder="Search" />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 16 16"
@@ -38,19 +38,21 @@
         <section>
              <div id="category" class="flex gap-4 justify-center my-8"></div>
         </section>
-        <section id="videos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-6 max-w-full">
-            <!-- <div class="card1">
-                <div>
-                    <h2>Hello World</h2>
+        <section id="videos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-6 max-w-full"> </section>
+
+        <section>
+            <button id="modalBox" class="btn hidden" onclick="my_modal_1.showModal()">open modal</button>
+            <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+              <div id="modal-container">
+              </div>
+                <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
                 </div>
-                <div>
-                    <img src="" alt="">
-                    <h2>Get Image</h2>
-                </div>
-                <p>walid hasan</p>
-                <span>91k views</span>
-            </div> -->
-           
+            </div>
+            </dialog>
         </section>
     </main>
 
